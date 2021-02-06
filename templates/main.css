@@ -31,14 +31,15 @@ body{
 	height: 100%;
 	margin-top: -200px;
 	overflow: hidden;
-	&.form-success{
-		.container{
-			h1{
-				transform: translateY(85px);
-			}
-		}
-	}
 }
+.wrapper h1{
+        font-size: 100px;
+    		transition-duration: 1s;
+    		transition-timing-function: ease-in-put;
+    		font-weight: 200;
+				transform: translateY(85px);
+        text-align: center;
+			}
 
 .container{
 	max-width: 600px;
