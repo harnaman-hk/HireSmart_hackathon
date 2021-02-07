@@ -1,13 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
-    <title>Document</title>
+  <title>
+    Results
+  </title>
+
+  <!-- Include Bootstrap for styling -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <!-- Include the Bootstrap Table 
+  CSS for the table -->
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
 </head>
+
 <body>
-  <div class="wrapper">
-    <h1 class="txt">output</h1>
+  <div class="container">
+    <h1 class="text text-success text-center ">
+      Hire_Smart
+    </h1>
+    <h6 class="text text-success text-center">
+      Results
+    </h6>
+    <table class="table-striped border-success">
+      <thead>
+        <tr>
+          <th data-field="name">
+            <span class="text-success">
+              Name
+            </span>
+          </th>
+          <th data-field="profile_link">
+            <span class="text-success">
+              Profile Link
+            </span>
+          </th>
+
+          <th data-field="skills">
+            <span class="text-success">
+              Skills
+            </span>
+          </th>
+          <th data-field="Current Job">
+            <span class="text-success">
+              Current Job
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in profiles %}
+          <tr>
+            <td>{{ profiles[i]["name"] }}</td>
+            <td><a href="{{ profiles[i]["name"] }}">Visit Profile</a></td>
+            <td>{{ profiles[i]["skills"] }}</td>
+            <td>{{ profiles[i]["cuurent_job"] }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Include jQuery and other required files for Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+  </script>
+
+  <!-- Include the JavaScript file for Bootstrap table -->
+  <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js">
+  </script>
+
+  <!-- Include the file where the JSON data is stored -->
+  <script type="text/javascript" src="scrappeddata_hackerearth.js">
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+
+      // Use the given data to create  
+      // the table and display it 
+      $('table').bootstrapTable({
+        data: mydata
+      });
+    });
+
+    // Parse the imported data as JSON 
+    // and store it 
+    var mydata = JSON.parse(da) 
+  </script>
 </body>
+
 </html>

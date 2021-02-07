@@ -14,7 +14,10 @@ def result():
     if "hackerearth" in recruiter_url:
         scrape_hearth(recruiter_url)
 
-    return render_template("out.html")
+    with open('scrapeddata.json', 'r') as f:
+        data = json.load(f)
+
+    return render_template("out.html", profiles=data)
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=8080, debug=True)
