@@ -18,50 +18,91 @@
 </head>
 
 <body>
-  <div class="container">
-    <h1 class="text text-success text-center ">
-      Hire_Smart
-    </h1>
-    <h6 class="text text-success text-center">
-      Results
-    </h6>
-    <table class="table-striped border-success">
-      <thead>
-        <tr>
-          <th data-field="name">
-            <span class="text-success">
-              Name
-            </span>
-          </th>
-          <th data-field="profile_link">
-            <span class="text-success">
-              Profile Link
-            </span>
-          </th>
+  <div class="">
+    <div class="container pt-5">
+      <h2 class="text text-info text-center" style="font-size: 60px;">
+        HireSmart
+      </h2>
+      <h5 class="text text-info text-center">
+        Results
+      </h5>
 
-          <th data-field="skills">
-            <span class="text-success">
-              Skills
-            </span>
-          </th>
-          <th data-field="Current Job">
-            <span class="text-success">
-              Current Job
-            </span>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for i in profiles %}
+      <br>
+      <br>
+      
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Sort by: Default
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Default</a>
+          <a class="dropdown-item" href="#">Python Developer</a>
+          <a class="dropdown-item" href="#">Java Developer</a>
+          <a class="dropdown-item" href="#">Web Developer</a>
+          <a class="dropdown-item" href="#">System Engineer</a>
+        </div>
+      </div>
+      
+      <br>
+      <br>
+      <br>
+<!-- 
+      {% for i in profiles %}
+        <div class="col-lg-10">
+          <div class="row">
+            <div class="col-sm-7">
+              <h5>{{ profiles[i]["name"] }}</h5>
+              <h6 class="text-secondary">{{ profiles[i]["cuurent_job"] }}</h6>
+              <a href="{{ profiles[i]["name"] }}">Visit Profile</a>
+            </div>
+            <div class="col-xs-5">
+              <h6>Skills</h6>
+              <span>{{ profiles[i]["skills"] }}</span>
+            </div>
+          </div>
+          <hr class="bg-muted center" style="width: 50%;">
+        </div>
+      {% endfor %} -->
+
+
+      <table class="table-striped border-success">
+        <thead>
+          <tr>
+            <th data-field="name">
+              <span class="text-info">
+                Name
+              </span>
+            </th>
+            <th data-field="profile_link">
+              <span class="text-info">
+                Profile Link
+              </span>
+            </th>
+            
+            <th data-field="skills">
+              <span class="text-info">
+                Skills
+              </span>
+            </th>
+            <th data-field="Current Job">
+              <span class="text-info">
+                Current Job
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in profiles %}
           <tr>
             <td>{{ profiles[i]["name"] }}</td>
-            <td><a href="{{ profiles[i]["name"] }}">Visit Profile</a></td>
+            <td><a class="text-info" href="{{ profiles[i]["name"] }}">Visit Profile</a></td>
             <td>{{ profiles[i]["skills"] }}</td>
             <td>{{ profiles[i]["cuurent_job"] }}</td>
           </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <!-- Include jQuery and other required files for Bootstrap -->

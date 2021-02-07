@@ -10,12 +10,21 @@
   <div class="wrapper">
 	<div><h1>HireSmart</h1></div>
 	   <div class="container">
-		     <h1>Enter Link</h1>
 		      <form class="form" method="POST" action="{{ url_for('result') }}">
-			         <input type="text" name="recruiter" placeholder="Link">
-			         <input type="submit" value="Submit">
+			         <input type="text" name="recruiter" placeholder="Enter your profile link">
+			         <input type="submit" value="Submit" class="center" width="30%">
+					 <br>
+					 <h3 style="font-size: 20px;">Please wait after providing the link to your profile</span>
 		      </form>
 	   </div>
    </div>
+
+   <script>
+	   function displayWaitMessage(){
+		   var submit_btn = document.getElementById("submitbtn");
+		   submit_btn.value = "Please wait ..";
+
+	   }
+   </script>
 </body>
 </html>
