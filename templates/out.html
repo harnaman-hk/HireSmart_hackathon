@@ -2,138 +2,102 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
-  <title>
-    Results
-  </title>
+    <title>
+        Results
+    </title>
 
-  <!-- Include Bootstrap for styling -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Include Bootstrap for styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-  <!-- Include the Bootstrap Table 
-  CSS for the table -->
-  <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
+    <!-- Include the Bootstrap Table CSS for the table -->
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
 </head>
 
 <body>
-  <div class="">
-    <div class="container pt-5">
-      <h2 class="text text-info text-center" style="font-size: 60px;">
-        HireSmart
-      </h2>
-      <h5 class="text text-info text-center">
-        Results
-      </h5>
+    <div class="">
+        <div class="container pt-5">
+            <h2 class="text text-info text-center" style="font-size: 60px;">
+                HireSmart
+            </h2>
+            <h5 class="text text-info text-center">
+                Results
+            </h5>
 
-      <br>
-      <br>
-      
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Sort by: Default
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Default</a>
-          <a class="dropdown-item" href="#">Python Developer</a>
-          <a class="dropdown-item" href="#">Java Developer</a>
-          <a class="dropdown-item" href="#">Web Developer</a>
-          <a class="dropdown-item" href="#">System Engineer</a>
-        </div>
-      </div>
-      
-      <br>
-      <br>
-      <br>
-<!-- 
-      {% for i in profiles %}
-        <div class="col-lg-10">
-          <div class="row">
-            <div class="col-sm-7">
-              <h5>{{ profiles[i]["name"] }}</h5>
-              <h6 class="text-secondary">{{ profiles[i]["cuurent_job"] }}</h6>
-              <a href="{{ profiles[i]["name"] }}">Visit Profile</a>
+            <br>
+            <br>
+
+            <div class="mb-5">
+                <form action="/query" method="POST">
+                    <div align="center">
+                        <p>Sort by:</p>
+                        <select name="sortby" class="btn btn-secondary" onchange="this.form.submit(); ">
+                            <option value="default" class="bg-secondary text-center">Default</option>
+                            <option value="sde" class="bg-secondary text-center" {% if sel == 'sde' %} selected {% endif %}>SDE</option>
+                            <option value="webd" class="bg-secondary text-center" {% if sel == 'webd' %} selected {% endif %}>Web Developer</option>
+                            <option value="javad" class="bg-secondary text-center" {% if sel == 'javad' %} selected {% endif %}>Java Developer</option>
+                            <option value="mlai" class="bg-secondary text-center" {% if sel == 'mlai' %} selected {% endif %}>ML/AI</option>
+                        </select>
+                    </div>
+                </form>
             </div>
-            <div class="col-xs-5">
-              <h6>Skills</h6>
-              <span>{{ profiles[i]["skills"] }}</span>
-            </div>
-          </div>
-          <hr class="bg-muted center" style="width: 50%;">
+
+            <table class="table-striped border-success">
+                <thead>
+                    <tr>
+                        <th data-field="name" class="bg-info p-2">
+                            <span class="text-white">
+                                Name
+                            </span>
+                        </th>
+                        <th data-field="profile_link" class="bg-info p-2 col-2">
+                            <span class="text-white">
+                                Profile Link
+                            </span>
+                        </th>
+
+                        <th data-field="skills" class="bg-info p-2">
+                            <span class="text-white">
+                                Skills
+                            </span>
+                        </th>
+                        <th data-field="Current Job" class="bg-info p-2">
+                            <span class="text-white">
+                                Current Job
+                            </span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in profiles %}
+                    <tr>
+                        <td class="p-2 text-center">{{ profiles[i]["name"] }}</td>
+                        <td class="p-2 text-center"><a class="text-info" href="{{ profiles[i][" name "] }}">Visit Profile</a></td>
+                        <td class="p-2 text-center">
+                            {% for skill in profiles[i]["skills"] %} <span class="mr-2 ">{{ skill }}</span>{% endfor %}
+                        </td>
+                        <td class="p-2 text-center">{{ profiles[i]["cuurent_job"] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="col-lg-12 text-center p-5">End</div>
         </div>
-      {% endfor %} -->
-
-
-      <table class="table-striped border-success">
-        <thead>
-          <tr>
-            <th data-field="name">
-              <span class="text-info">
-                Name
-              </span>
-            </th>
-            <th data-field="profile_link">
-              <span class="text-info">
-                Profile Link
-              </span>
-            </th>
-            
-            <th data-field="skills">
-              <span class="text-info">
-                Skills
-              </span>
-            </th>
-            <th data-field="Current Job">
-              <span class="text-info">
-                Current Job
-              </span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for i in profiles %}
-          <tr>
-            <td>{{ profiles[i]["name"] }}</td>
-            <td><a class="text-info" href="{{ profiles[i]["name"] }}">Visit Profile</a></td>
-            <td>{{ profiles[i]["skills"] }}</td>
-            <td>{{ profiles[i]["cuurent_job"] }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
     </div>
-  </div>
 
-  <!-- Include jQuery and other required files for Bootstrap -->
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js">
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
-  </script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
-  </script>
+    <!-- Include jQuery and other required files for Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+    </script>
 
-  <!-- Include the JavaScript file for Bootstrap table -->
-  <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js">
-  </script>
-
-  <!-- Include the file where the JSON data is stored -->
-  <script type="text/javascript" src="scrappeddata_hackerearth.js">
-  </script>
-  <script type="text/javascript">
-    $(document).ready(function () {
-
-      // Use the given data to create  
-      // the table and display it 
-      $('table').bootstrapTable({
-        data: mydata
-      });
-    });
-
-    // Parse the imported data as JSON 
-    // and store it 
-    var mydata = JSON.parse(da) 
-  </script>
+    <!-- Include the JavaScript file for Bootstrap table -->
+    <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js">
+    </script>
 </body>
 
 </html>

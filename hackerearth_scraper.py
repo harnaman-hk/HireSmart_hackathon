@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 import json 
+import os
 
 def scrape_hearth(url):
     options = Options()
@@ -16,8 +17,8 @@ def scrape_hearth(url):
     usrname = browser.find_element_by_id("id_login")
     pwd = browser.find_element_by_id("id_password")
 
-    usrname.send_keys("hostxyz1")
-    pwd.send_keys("hackhack")
+    usrname.send_keys(os.environ.get("username"))
+    pwd.send_keys(os.environ.get("passwd"))
     submit_btn = browser.find_element_by_name("submit")
     pwd.send_keys(u'\ue007')
 
@@ -46,12 +47,11 @@ def scrape_hearth(url):
         data[i]["profile_link"] = follower.get_attribute("href")
         
     for i in data:
-        if i > 20:
-            break
         try:
             browser.get(data[i]["profile_link"])
             skills = browser.find_element_by_xpath("//div[contains(@class, 'attributes regular dark')]")
             data[i]["skills"] = skills.text
+            data[i]["skills"] = [sk.strip() for sk in data[i]["skills"].split(',')]
             current_job = browser.find_element_by_xpath("//span[contains(@class, 'text')]")
             data[i]["cuurent_job"] = current_job.text
             browser.implicitly_wait(2)

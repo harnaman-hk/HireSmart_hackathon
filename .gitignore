@@ -4,7 +4,7 @@
 *.pyc
 *.pyo
 env/
-env*
+*env/*
 dist/
 build/
 *.egg
@@ -16,6 +16,8 @@ _mailinglist
 .idea/
 docs/_build/
 .vscode
+geckodriver.log
+scrapeddata.json
 
 # Coverage reports
 htmlcov/
