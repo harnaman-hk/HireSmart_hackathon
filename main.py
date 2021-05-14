@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request
+from os import error
+from flask import Flask, flash, render_template, request
 from hackerearth_scraper import *
 
 mapquery = {
@@ -32,6 +33,7 @@ def score_queries(data, param):
 
 
 app = Flask(__name__)
+app.secret_key = os.urandom(24)
 
 @app.route("/", methods=['GET'])
 def index():
@@ -43,10 +45,13 @@ def result():
 
     if "hackerearth" in recruiter_url:
         scrape_hearth(recruiter_url)
+        data = read_data()
+        return render_template("out.html", profiles=data)
 
-    data = read_data()
+    error = "Please provide a valid HackerEarth profile link"
+    flash(error)
+    return render_template("index.html", error=error)
 
-    return render_template("out.html", profiles=data)
 
 @app.route("/query", methods=['POST'])
 def query():
@@ -59,4 +64,7 @@ def query():
     return render_template("out.html", profiles=query_data, sel=query_req)
 
 if __name__ == "__main__":
+    # app.secret_key = 'supersecretkey'
+    # app.config['SESSION_TYPE'] = 'filesystem'
+    # sess.init_app(app)
     app.run(host="127.0.0.1", port=8080, debug=True)

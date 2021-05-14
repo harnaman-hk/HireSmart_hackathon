@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <title>Document</title>
+    <title>HireSmart</title>
 </head>
 
 <body>
@@ -21,6 +21,13 @@
                 <br>
                 <h3 class="text-white" style="font-size: 20px; font-weight: bold;">Please wait after providing the link to your profile</span>
             </form>
+            {% with messages = get_flashed_messages() %} {% if messages %}
+            <ul class="flashes text-center" style="list-style: none;">
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %} {% endwith %}
         </div>
     </div>
 
